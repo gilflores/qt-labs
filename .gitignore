@@ -87,3 +87,4 @@ TEST_ROOT/
 
 
 qt-http-server/.qmake.stash
+qt-http-server/dist/
