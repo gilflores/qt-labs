@@ -19,7 +19,7 @@ private slots:
     void acceptRequest();
 
 protected:
-    virtual void incomingConnection(int socketId);
+    void incomingConnection(qint64  socketId);
 
 };
 

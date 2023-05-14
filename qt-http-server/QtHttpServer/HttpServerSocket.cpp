@@ -24,7 +24,7 @@ HttpServerSocket::HttpServerSocket(QObject *parent, SiteRepository *site)
  *          use QThread Later
  * \param socketId
  */
-void HttpServerSocket::incomingConnection(int socketId)
+void HttpServerSocket::incomingConnection(qint64  socketId)
 {
     qDebug () << "HttpServer incoming Connections id: " << socketId;
     HttpSocket *socket = new HttpSocket(this, siteRepository);
