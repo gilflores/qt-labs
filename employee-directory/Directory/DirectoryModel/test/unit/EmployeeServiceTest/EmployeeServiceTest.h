@@ -23,6 +23,9 @@ private slots:
     void testIsValidWithValidEmployee_data();
     void testIsValidWithValidEmployee();
 
+    void testIsValidWithInvalidEmployee_data();
+    void testIsValidWithInvalidEmployee();
+
     void testSaveValidEmployeeCaseSaveAndUpdate();
 
 private:

@@ -15,7 +15,7 @@ StringUtil::StringUtil()
  */
 const char* StringUtil::getCharPointer(const QString& string)
 {
-    QByteArray array = string.toAscii();
+    QByteArray array = string.toLatin1();
     const char *stringChar = array.constData();
     return stringChar;
 }

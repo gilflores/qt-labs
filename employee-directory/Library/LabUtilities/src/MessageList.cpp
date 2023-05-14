@@ -35,6 +35,19 @@ void MessageList::add(const MessageType type, const QString& content)
     add(message);
 }
 
+/*!
+ * \brief Adds a message to the list using the type and content
+ * \param type The type of message to be added
+ * \param content The content for the message that will be added to the list
+ * \param date  The date with time of the message
+ */
+void MessageList::add(const MessageType type, const QString& content, const QDateTime& date)
+{
+  Message message(type, content, date);
+  add(message);
+}
+
+
 void MessageList::addError(const QString &content)
 {
   Message message(Error, content);
@@ -87,6 +100,7 @@ QString MessageList::toString() const
           case Info:  s += "INFO  -"; break;
           case Warn:  s += "WARN  -"; break;
           case Error: s += "ERROR -"; break;
+          case Fatal: s += "FATAL -"; break;
         }
       s += m.getContent() + "\n";
     }
@@ -105,32 +119,32 @@ bool MessageList::hasMessages() const
 
 /*!
  * \brief Returns true if the regexp matches in at least one of the messages
- *        in the lista
+ *        in the list
  * \param regexp The regexp pattern that will be searched in the list
  * \return True if at least one message exist false in other case.
  */
 bool MessageList::containsWithRegExp(const QRegExp& regexp) const
 {
-    foreach(Message m, messages)
+  foreach(const Message& m, messages)
     {
-        if(m.getContent().contains(regexp))
+      if(m.getContent().contains(regexp))
         {
             return true;
         }
     }
-    return false;
+  return false;
 }
 
 /*!
  * \brief Returns true if the regexp matches in at least one of the messages
- *        in the lista
+ *        in the list
  * \param regexpString The regexp pattern that will be searched in the list
  * \return True if at least one message exist false in other case.
  */
 bool MessageList::containsWithRegExp(const QString& regexpString) const
 {
-    QRegExp r(regexpString);
-    return containsWithRegExp(r);
+  QRegExp r(regexpString);
+  return containsWithRegExp(r);
 }
 
 /*!
@@ -140,15 +154,15 @@ bool MessageList::containsWithRegExp(const QString& regexpString) const
  */
 int MessageList::countWithRegExp(const QRegExp& regexp) const
 {
-    int elements = 0;
-    foreach(Message m, this->messages)
+  int elements = 0;
+  foreach(const Message& m, messages)
     {
-        if(m.getContent().contains(regexp))
+      if(m.getContent().contains(regexp))
         {
-            elements++;
+          elements++;
         }
     }
-    return elements;
+  return elements;
 }
 
 /*!
@@ -159,6 +173,6 @@ int MessageList::countWithRegExp(const QRegExp& regexp) const
  */
 int MessageList::countWithRegExp(const QString& regexpString) const
 {
-    QRegExp r(regexpString);
-    return countWithRegExp(r);
+  QRegExp r(regexpString);
+  return countWithRegExp(r);
 }

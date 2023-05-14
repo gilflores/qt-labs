@@ -22,10 +22,7 @@ void EmployeeFileDaoTest::cleanupTestCase()
 
 /*!
  * \brief Test the add method with the following intentions:
- * - The user must be saved in an empty file
- * - The add method must return true as employeeAdded
- * - The count of file must be 1 after the add
- * - Another user will be added and the count of the file must be 2
+ *
  */
 void EmployeeFileDaoTest::testAdd()
 {
@@ -63,6 +60,27 @@ void EmployeeFileDaoTest::testAddMultiple_data()
 {
   printHeader(__PRETTY_FUNCTION__);
 
+  const QString fileToTest = DEFAULT_DIRECTORY + "/employee-addMultiple.data";
+  FileUtil::deleteFileIfExists(fileToTest);
+
+  QTest::addColumn<QString>("firstName");
+  QTest::addColumn<QString>("lastName");
+  QTest::addColumn<QString>("address");
+  QTest::addColumn<QString>("mail");
+  QTest::addColumn<long>("phone");
+  QTest::addColumn<int>("extension");
+  QTest::addColumn<QString>("fileToTest");
+
+  QTest::newRow("Employee1") << "Michael" << "Tempuri"
+                             << "1980 Jackovson Rd"
+                             << "tempuri@visual.com"
+                             << 899123987l << 20 << fileToTest;
+
+  QTest::newRow("Employee2") << "Rod" << "Bashlet"
+                             << "2304 Sunshine Dr"
+                             << "rod.bashlet@office345.com"
+                             << 233123987l << 782 << fileToTest;
+
 }
 
 /*!
@@ -73,15 +91,35 @@ void EmployeeFileDaoTest::testAddMultiple_data()
  */
 void EmployeeFileDaoTest::testAddMultiple()
 {
+  QFETCH(QString, firstName);
+  QFETCH(QString, lastName);
+  QFETCH(QString, address);
+  QFETCH(QString, mail);
+  QFETCH(long, phone);
+  QFETCH(int, extension);
+  QFETCH(QString, fileToTest);
+
+  Employee baseEmployee;
+  baseEmployee.setFirstName(firstName);
+  baseEmployee.setLastName(lastName);
+  baseEmployee.setAddress(address);
+  baseEmployee.setMail(mail);
+  baseEmployee.setPhone(phone);
+  baseEmployee.setExtension(extension);
+
+  EmployeeFileDao dao(fileToTest);
+  dao.add(baseEmployee);
+  QVERIFY2(baseEmployee.employeeId() > 0, "The employeeId must be the same");
+  Employee resultEmployee = dao.findByEmployeeId(baseEmployee.employeeId());
+
+  QVERIFY2(baseEmployee.equals(resultEmployee),
+           "The values in the result employee must be the same");
+  qDebug() << qPrintable(baseEmployee.toString());
 
 }
 
 /*!
- * \brief Test the update method with the following intentions
- * - A new file with five employess will be created
- * - The employee with id 3 will be updated in the file
- * - The employee will be read using findByEmployee() and it must be equal than
- *   the updated employee.
+ * \brief Test the update method
  */
 void EmployeeFileDaoTest::testUpdate()
 {
@@ -126,7 +164,22 @@ void EmployeeFileDaoTest::testFindAll()
 {
   printHeader(__PRETTY_FUNCTION__);
   const QString fileToTest = DEFAULT_DIRECTORY + "/employee-findall.data";
+  FileUtil::deleteFileIfExists(fileToTest);
 
+  // Adding registers into file
+  QList<Employee> list = createListOfEmployees();
+  addList(fileToTest, list);
+
+  // Reading the information
+  EmployeeFileDao dao(fileToTest);
+  QList<Employee> result = dao.findAll();
+  int rowsExpected = 5;
+  QCOMPARE(rowsExpected, result.count());
+
+  foreach (Employee e, result)
+    {
+      qDebug() << qPrintable(e.toString());
+    }
 }
 
 /*!
@@ -140,10 +193,25 @@ void EmployeeFileDaoTest::testFindEmployeeById()
   printHeader(__PRETTY_FUNCTION__);
 
   const QString fileToTest = DEFAULT_DIRECTORY + "/employee-findById.data";
+  FileUtil::deleteFileIfExists(fileToTest);
+
+  // Adding registers into file
+  QList<Employee> list = createListOfEmployees();
+  addList(fileToTest, list);
+
+  // Reading the information
+  EmployeeFileDao dao(fileToTest);
+  for (int i =0;i < list.count(); i++)
+    {
+      Employee& e = list[i];
+      Employee resultEmployee = dao.findByEmployeeId(e.employeeId());
+      QVERIFY2(resultEmployee.employeeId() > 0,
+               "The employeeId must be greater than 0");
+      QVERIFY2(e.equals(resultEmployee),
+               "The values in the result employee must be the same");
+      qDebug() << qPrintable(e.toString());
+    }
 }
-
-
-// -- Helper methods -----------------------------------------------------------
 
 /*!
  * \brief EmployeeFileDaoTest::createEmployee
@@ -210,9 +278,10 @@ QList<Employee> EmployeeFileDaoTest::createListOfEmployees()
 }
 
 /*!
- * \brief Save the list of employee using the DAO.
- * \param fileName The file name of the file
- * \param employees The list of employees
+ * \brief Save the list of employees into the database
+ * \param fileName
+ * \param employees
+ * \return
  */
 void EmployeeFileDaoTest::addList(const QString &fileName, QList<Employee>& employees)
 {
@@ -227,8 +296,7 @@ void EmployeeFileDaoTest::addList(const QString &fileName, QList<Employee>& empl
 
 /*!
  * \brief Print the header of the test
- * \param functionsName Generally we use the __PRETTY_FUNCTION__ to show the
- *        name of the tested function
+ * \param functionsName
  */
 void EmployeeFileDaoTest::printHeader(const char *functionsName) const
 {

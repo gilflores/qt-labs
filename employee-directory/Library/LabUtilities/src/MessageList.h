@@ -1,8 +1,11 @@
 #ifndef MESSAGELIST_H
 #define MESSAGELIST_H
+
+#include "Message.h"
+
 #include <QList>
 #include <QString>
-#include "Message.h"
+
 
 
 /*!
@@ -27,6 +30,7 @@ public:
     MessageList();
     void add(const Message& message);
     void add(const MessageType type, const QString& content);
+    void add(const MessageType type, const QString& content, const QDateTime& date);
     void addError(const QString& content);
     void addInfo(const QString& content);
     int lenght() const;
