@@ -12,5 +12,4 @@ TEMPLATE = app
 
 
 SOURCES += SiteRepositoryTest.cpp
-
 HEADERS += SiteRepositoryTest.h

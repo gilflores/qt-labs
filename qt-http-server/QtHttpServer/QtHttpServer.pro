@@ -28,42 +28,49 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 QMAKE_CXXFLAGS += -std=c++0x
 
-OBJECTS_DIR=.build
-MOC_DIR=.build
-UI_DIR=.build
-RCC_DIR=.build
-
 #CONFIG += c++11
 
+INCLUDEPATH+= .
+INCLUDEPATH+= utils/.
+INCLUDEPATH+= http/.
+INCLUDEPATH+= http/server/.
 
-SOURCES += SiteRepository.cpp
-SOURCES += HttpRequest.cpp
-SOURCES += HttpServer.cpp
-SOURCES += HttpSocket.cpp
-SOURCES += HttpServerSocket.cpp
-SOURCES += FileUtil.cpp
-SOURCES += HttpResponse.cpp
-SOURCES += RequestHandler.cpp
-SOURCES += SiteConfiguration.cpp
 
-HEADERS += SiteRepository.h
-HEADERS += HttpRequest.h
-HEADERS += HttpServer.h
-HEADERS += HttpSocket.h
-HEADERS += HttpServerSocket.h
-HEADERS += FileUtil.h
-HEADERS += HttpResponse.h
-HEADERS += RequestHandler.h
-HEADERS += SiteConfiguration.h
+SOURCES += utils/FileUtil.cpp
 
-API_HEADERS += SiteRepository.h 
-API_HEADERS += HttpRequest.h 
-API_HEADERS += HttpResponse.h
-API_HEADERS += HttpServer.h 
-API_HEADERS += HttpSocket.h 
-API_HEADERS += HttpServerSocket.h
-API_HEADERS += SiteConfiguration.h
-API_HEADERS += FileUtil.h
+SOURCES += http/HttpResponse.cpp
+SOURCES += http/RequestHandler.cpp
+SOURCES += http/HttpRequest.cpp
+
+
+SOURCES += http/server/SiteRepository.cpp
+SOURCES += http/server/HttpSocket.cpp
+SOURCES += http/server/HttpServerSocket.cpp
+SOURCES += http/server/SiteConfiguration.cpp
+SOURCES += http/server/HttpServer.cpp
+
+HEADERS += utils/FileUtil.h
+
+HEADERS += http/HttpRequest.h
+HEADERS += http/HttpResponse.h
+HEADERS += http/RequestHandler.h
+
+HEADERS += http/server/SiteRepository.h
+HEADERS += http/server/HttpServer.h
+HEADERS += http/server/HttpSocket.h
+HEADERS += http/server/HttpServerSocket.h
+HEADERS += http/server/SiteConfiguration.h
+
+API_HEADERS += utils/FileUtil.h
+API_HEADERS += http/HttpRequest.h 
+API_HEADERS += http/HttpResponse.h
+
+API_HEADERS += http/server/SiteRepository.h 
+API_HEADERS += http/server/HttpServer.h 
+API_HEADERS += http/server/HttpSocket.h 
+API_HEADERS += http/server/HttpServerSocket.h
+API_HEADERS += http/server/SiteConfiguration.h
+
 
 apiheaders.files=$$API_HEADERS
 apiheaders.path=$$QTLAB_ROOT/include/

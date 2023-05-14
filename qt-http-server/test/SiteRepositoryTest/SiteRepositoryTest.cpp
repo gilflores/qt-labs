@@ -1,10 +1,13 @@
-#include <QtTest>
 #include "SiteRepositoryTest.h"
+
+#include "SiteRepository.h"
+#include "FileUtil.h"
+
+#include <QtTest>
 #include <QDir>
 #include <QFile>
 #include <QIODevice>
-#include "SiteRepository.h"
-#include "FileUtil.h"
+
 
 // add necessary includes here
 
