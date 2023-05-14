@@ -3,9 +3,9 @@
 
 const QString SiteConfiguration::TEST_ROOT = "/home/dev/test";
 const QString SiteConfiguration::TEST_DEFAULT_SITE = "/sites/testSite";
-const QString SiteConfiguration::ROOT_SITE = "/home/dev/projects/git/ProyectosC/Qt/QtHttpServer";
+const QString SiteConfiguration::ROOT_SITE = ".";
 const QString SiteConfiguration::DEFAULT_SITE = "/sites";
-const QString SiteConfiguration::SERVER_NAME = "c++Grizzly";
+const QString SiteConfiguration::SERVER_NAME = "C++Grizzly";
 const quint16 SiteConfiguration::DEFAULT_PORT = 8080;
 
 SiteConfiguration::SiteConfiguration()

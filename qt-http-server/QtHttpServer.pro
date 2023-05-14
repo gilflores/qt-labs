@@ -2,9 +2,11 @@ TEMPLATE = subdirs
 
 CONFIG += ordered
 
-SUBDIRS += \
-    QtHttpServer \
-    QtHttpServerTestFolder \
-    QtHttpServerUi
+SUBDIRS += QtHttpServer 
+SUBDIRS += QtHttpServerUi
+SUBDIRS += test
 
+
+QtHttpServerUi.depends = QtHttpServer
+test.depends = QtHttpServer
 

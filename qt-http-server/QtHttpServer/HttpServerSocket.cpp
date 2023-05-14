@@ -12,8 +12,8 @@ HttpServerSocket::HttpServerSocket(QObject *parent, SiteRepository *site)
 {
     this->siteRepository = site;
 
-    // QT has the hability to emit signal when a sockets is connected
-    // we use the connect of QObject to brind the newConnection() of
+    // QT has the ability to emit signal when a sockets is connected
+    // we use the connect of QObject to bring the newConnection() of
     // TcpServer with my local method acceptRequest()
     connect(this, SIGNAL(newConnection()),
             this, SLOT(acceptRequest()));
@@ -26,7 +26,7 @@ HttpServerSocket::HttpServerSocket(QObject *parent, SiteRepository *site)
  */
 void HttpServerSocket::incomingConnection(int socketId)
 {
-    qDebug () << "HttpServer incomming Connections id: " << socketId;
+    qDebug () << "HttpServer incoming Connections id: " << socketId;
     HttpSocket *socket = new HttpSocket(this, siteRepository);
     socket->setSocketDescriptor(socketId);
 

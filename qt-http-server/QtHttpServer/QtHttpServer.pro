@@ -3,6 +3,7 @@
 # Project created by QtCreator 2019-02-01T10:28:39
 #
 #-------------------------------------------------
+include(../QtHttpServer.pri)
 
 QT+=core
 QT+=gui
@@ -34,41 +35,39 @@ RCC_DIR=.build
 
 #CONFIG += c++11
 
-SOURCES += \
-    SiteRepository.cpp \
-    HttpRequest.cpp \
-    HttpServer.cpp \
-    HttpSocket.cpp \
-    HttpServerSocket.cpp \
-    FileUtil.cpp \
-    HttpResponse.cpp \
-    RequestHandler.cpp \
-    SiteConfiguration.cpp
 
-API_HEADERS += \
-    SiteRepository.h \
-   HttpRequest.h \
-#    HttpServer.h \
-    HttpSocket.h \
-    HttpServerSocket.h
+SOURCES += SiteRepository.cpp
+SOURCES += HttpRequest.cpp
+SOURCES += HttpServer.cpp
+SOURCES += HttpSocket.cpp
+SOURCES += HttpServerSocket.cpp
+SOURCES += FileUtil.cpp
+SOURCES += HttpResponse.cpp
+SOURCES += RequestHandler.cpp
+SOURCES += SiteConfiguration.cpp
 
-HEADERS += \
-    SiteRepository.h \
-    HttpRequest.h \
-    HttpServer.h \
-    HttpSocket.h \
-    HttpServerSocket.h \
-    FileUtil.h \
-    HttpResponse.h \
-    RequestHandler.h \
-    SiteConfiguration.h
+HEADERS += SiteRepository.h
+HEADERS += HttpRequest.h
+HEADERS += HttpServer.h
+HEADERS += HttpSocket.h
+HEADERS += HttpServerSocket.h
+HEADERS += FileUtil.h
+HEADERS += HttpResponse.h
+HEADERS += RequestHandler.h
+HEADERS += SiteConfiguration.h
 
-
-
+API_HEADERS += SiteRepository.h 
+API_HEADERS += HttpRequest.h 
+API_HEADERS += HttpResponse.h
+API_HEADERS += HttpServer.h 
+API_HEADERS += HttpSocket.h 
+API_HEADERS += HttpServerSocket.h
+API_HEADERS += SiteConfiguration.h
+API_HEADERS += FileUtil.h
 
 apiheaders.files=$$API_HEADERS
-apiheaders.path=$$(QTLAB_ROOT)/include/
+apiheaders.path=$$QTLAB_ROOT/include/
 
-target.path = $$(QTLAB_ROOT)/lib
+target.path = $$QTLAB_ROOT/lib
 INSTALLS += target apiheaders
 
