@@ -52,3 +52,36 @@ compile_commands.json
 *creator.user*
 
 *_qmlcache.qrc
+
+# Editors
+.vscode
+*.swp
+
+.build
+
+# Resource files generated from translations
+*_en_US.qm
+*_es_MX.qm
+*_pt_BR.qm
+*_en_BR.qm
+
+# General executables
+*.x
+!*.x/
+
+# Documentation
+*/docs/
+**/docs/
+
+# Test results
+**/test/results/**/*
+*.test
+*.log
+
+#installroot
+installroot
+TEST_ROOT/
+
+*.gcno
+
+
