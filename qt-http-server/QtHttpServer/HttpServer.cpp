@@ -44,6 +44,8 @@ bool HttpServer::start()
     qDebug() << "Server " << configuration->getServerName() <<
                 "  started at port " << configuration->getTcpPort() << "!!";
     qDebug() << "Publishing site: " << configuration->getFullSitePath() << "!!";
+
+    qDebug() << "Publishing Directory: " << QFileInfo(configuration->getFullSitePath()).absolutePath() << "!!";
     return true;
 }
 

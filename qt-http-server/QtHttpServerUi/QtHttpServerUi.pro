@@ -3,6 +3,7 @@
 # Project created by QtCreator 2019-02-04T12:45:26
 #
 #-------------------------------------------------
+include(../QtHttpServer.pri)
 
 QT+= core gui
 QT+=network
@@ -49,11 +50,14 @@ HEADERS += \
 FORMS += \
         MainWindow.ui
 
-# Default rules for deployment.
-target.path = $$(QTLAB_ROOT)/bin
-INSTALLS += target
 
 LIBS += -L$$OUT_PWD/../QtHttpServer/ -lQtHttpServer
 
-INCLUDEPATH += $$PWD/../QtHttpServer
-DEPENDPATH += $$PWD/../QtHttpServer
+
+apiheaders.files=$$API_HEADERS
+apiheaders.path=$$QTLAB_ROOT/include/
+
+target.path = $$QTLAB_ROOT/bin
+INSTALLS += target apiheaders
+
+
