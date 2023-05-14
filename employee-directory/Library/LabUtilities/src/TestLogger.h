@@ -18,9 +18,15 @@ class TestLogger
 public:
     ~TestLogger();
     void log(QtMsgType t, const char *msg);
+    #if (QT_VERSION >= 0x050000)
+    void logQt5(QtMsgType type, const QMessageLogContext& context, const QString& msg );
+    void printLogQt5(const QMessageLogContext& context,
+                     const QString& msg, const QString& level, const QString& timestamp);
+    #endif
+
     static TestLogger* instance();
     static TestLogger* newInstance();
-    MessageList* getList();
+    const MessageList& getList() const;
     void clean();
     void stop();
 
@@ -28,7 +34,7 @@ private:
     TestLogger();
     
     // Why we use pointers not only a variable
-    MessageList* list;
+    MessageList list;
     static TestLogger* INSTANCE;
 };
 
