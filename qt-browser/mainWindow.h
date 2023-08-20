@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 class QNetworkReply;
+class CustomWebPage;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,8 +18,9 @@ public:
   ~MainWindow();
 
 protected slots:
-  virtual void examineHeaders(QNetworkReply *);
+  virtual void analyzeHeaders(QNetworkReply *);
   virtual void finished(bool ok);
+
 
 private slots:
     void on_backButton_clicked();
@@ -31,7 +33,10 @@ private slots:
 
     void on_urlEdit_returnPressed();
 
+    virtual void linkClicked(const QUrl& url);
+
 private:
   Ui::MainWindow *ui;
+  CustomWebPage *page;
 };
 #endif // MAINWINDOW_H

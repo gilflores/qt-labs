@@ -88,3 +88,5 @@ TEST_ROOT/
 
 qt-http-server/.qmake.stash
 qt-http-server/dist/
+qt-browser/.qmake.stash
+qt-browser/qt-browser
