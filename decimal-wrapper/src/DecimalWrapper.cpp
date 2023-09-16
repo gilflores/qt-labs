@@ -1,6 +1,9 @@
 #include "DecimalWrapper.h"
 #include <QDebug>
 
+/*!
+ * \brief Constructor of the class
+ */
 DecimalWrapper::DecimalWrapper():
     _numLong(0),
     _numDouble(0),
