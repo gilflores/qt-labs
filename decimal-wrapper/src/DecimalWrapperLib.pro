@@ -3,6 +3,8 @@ QT -= gui
 CONFIG += c++11 console
 CONFIG -= app_bundle
 
+TEMPLATE=lib
+
 OBJECTS_DIR=.build
 MOC_DIR=.build
 UI_DIR=.build
@@ -21,8 +23,8 @@ SOURCES += \
 
 # Default rules for deployment.
 
-TARGET=DecimalWrapper.x
-target.path = ./bin
+TARGET=DecimalWrapper
+target.path = ./lib
 INSTALLS += target apiheaders
 
 
