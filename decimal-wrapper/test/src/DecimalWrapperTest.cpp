@@ -1,13 +1,13 @@
 #include <QtTest>
-#include "DecimalP.h"
+#include "DecimalWrapper.h"
 
-class DecimalPTest : public QObject
+class DecimalWrapperTest : public QObject
 {
     Q_OBJECT
 
 public:
-    DecimalPTest();
-    ~DecimalPTest();
+    DecimalWrapperTest();
+    ~DecimalWrapperTest();
 
 private slots:
     void initTestCase(); //objects init
@@ -17,17 +17,17 @@ private slots:
     void cleanupTestCase();
 };
 
-DecimalPTest::DecimalPTest()
+DecimalWrapperTest::DecimalWrapperTest()
 {
 
 }
 
-DecimalPTest::~DecimalPTest()
+DecimalWrapperTest::~DecimalWrapperTest()
 {
 
 }
 
-void DecimalPTest::initTestCase()
+void DecimalWrapperTest::initTestCase()
 {
     int intValue;
     double doubleValue;
@@ -38,10 +38,10 @@ void DecimalPTest::initTestCase()
     qDebug() << "";
 
     qDebug() << "Test: int ctr (prec = 0)";
-    qDebug() << "Create a DecimalP object based on an int value and prec=0";
+    qDebug() << "Create a DecimalWrapper object based on an int value and prec=0";
     qDebug() << "Should store and return the original int value";
     intValue = 5;
-    DecimalP b(intValue);
+    DecimalWrapper b(intValue);
     qDebug() << "Convtr Ctr: Num(" << b.getNum() <<"), Double(" << b.getDouble()
              << "), Prec(" << b.getPrec() <<")";
     qDebug() << "";
@@ -49,10 +49,10 @@ void DecimalPTest::initTestCase()
     QVERIFY(b.getDouble() == 5.0);
 
     qDebug() << "Test: double ctr, prec=1";
-    qDebug() << "Create a DecimalP object based on a double value and prec=1";
+    qDebug() << "Create a DecimalWrapper object based on a double value and prec=1";
     qDebug() << "Should store and return original double value @ 1 digit mant";
     doubleValue = 5.05;
-    DecimalP c(doubleValue, 1);
+    DecimalWrapper c(doubleValue, 1);
     qDebug() << "Ctr: Num(" << c.getNum() <<"), Double(" << c.toString()
              << "), Prec(" << c.getPrec() <<")";
     qDebug() << "";
@@ -60,11 +60,11 @@ void DecimalPTest::initTestCase()
     QVERIFY(c.getDouble() == 5.0);
 
     qDebug() << "Test: int ctr, prec=2";
-    qDebug() << "Create a DecimalP object based on an int value and prec=2";
+    qDebug() << "Create a DecimalWrapper object based on an int value and prec=2";
     qDebug() << "Should store and return original int value @ 2 digit mant "
                 "if shown as a double";
     intValue = 500;
-    DecimalP d(intValue, 2);
+    DecimalWrapper d(intValue, 2);
     qDebug() << "Ctr: Num(" << d.getNum() <<"), Double(" << d.toString()
              << "), Prec(" << d.getPrec() <<")";
     qDebug() << "";
@@ -72,10 +72,10 @@ void DecimalPTest::initTestCase()
     QVERIFY(d.getDouble() == 5.00);
 
     qDebug() << "Test: double ctr, prec=4";
-    qDebug() << "Create a DecimalP object based on a double value and prec=4";
+    qDebug() << "Create a DecimalWrapper object based on a double value and prec=4";
     qDebug() << "Should store and return original double value @ 4 digit mant";
     doubleValue = 555.7777;
-    DecimalP f(doubleValue,4);
+    DecimalWrapper f(doubleValue,4);
     qDebug() << "double Ctr: Num(" << f.getNum() <<"), Double(" << f.toString()
              << "), Prec(" << f.getPrec() <<")";
     qDebug() << "";
@@ -83,7 +83,7 @@ void DecimalPTest::initTestCase()
     QVERIFY(f.getDouble() == 555.7777);
 }
 
-void DecimalPTest::testToString()
+void DecimalWrapperTest::testToString()
 {
     int intValue;
     double doubleValue;
@@ -94,35 +94,35 @@ void DecimalPTest::testToString()
     qDebug() << "";
 
     intValue = 5;
-    DecimalP b(intValue);
+    DecimalWrapper b(intValue);
     qDebug() << "Convtr Ctr: Num(" << b.getNum() <<"), Double(" << b.getDouble()
              << "), Prec(" << b.getPrec() <<")";
     qDebug() << "";
     QVERIFY(b.toString() == "5");
 
     doubleValue = 5.05;
-    DecimalP c(doubleValue, 1);
+    DecimalWrapper c(doubleValue, 1);
     qDebug() << "Ctr: Num(" << c.getNum() <<"), Double(" << c.toString()
              << "), Prec(" << c.getPrec() <<")";
     qDebug() << "";
     QVERIFY(c.toString() == "5.0");
 
     intValue = 500;
-    DecimalP d(intValue, 2);
+    DecimalWrapper d(intValue, 2);
     qDebug() << "Ctr: Num(" << d.getNum() <<"), Double(" << d.toString()
              << "), Prec(" << d.getPrec() <<")";
     qDebug() << "";
     QVERIFY(d.toString() == "5.00");
 
     doubleValue = 555.7777;
-    DecimalP f(doubleValue,4);
+    DecimalWrapper f(doubleValue,4);
     qDebug() << "double Ctr: Num(" << f.getNum() <<"), Double(" << f.toString()
              << "), Prec(" << f.getPrec() <<")";
     qDebug() << "";
     QVERIFY(f.toString() == "555.7777");
 }
 
-void DecimalPTest::testToEZC()
+void DecimalWrapperTest::testToEZC()
 {
     double doubleValue;
     QString strValue;
@@ -132,7 +132,7 @@ void DecimalPTest::testToEZC()
     qDebug() << "";
 
     doubleValue = 555.7777;
-    DecimalP f(doubleValue,4);
+    DecimalWrapper f(doubleValue,4);
     qDebug() << "double Ctr: Num(" << f.getNum() <<"), Double(" << f.toString()
              << "), Prec(" << f.getPrec() << ")";
     qDebug() << "";
@@ -145,23 +145,23 @@ void DecimalPTest::testToEZC()
     QVERIFY(f.toString() == "555.77");
 }
 
-void DecimalPTest::testOperators()
+void DecimalWrapperTest::testOperators()
 {
     int intValue;
     double doubleValue;
     QString strValue;
 
     doubleValue = 5.05;
-    DecimalP c(doubleValue, 1);
+    DecimalWrapper c(doubleValue, 1);
 
     intValue = 500;
-    DecimalP d(intValue, 2);
+    DecimalWrapper d(intValue, 2);
 
     intValue = 400;
-    DecimalP e(intValue,2); //int ctr
+    DecimalWrapper e(intValue,2); //int ctr
 
     doubleValue = 555.7777;
-    DecimalP f(doubleValue,4);
+    DecimalWrapper f(doubleValue,4);
 
     qDebug() << "operator+: c(" << c.toString() << ") + d(" << d.toString() <<
                 ") = " << QString::number(c+d, 'g');
@@ -196,10 +196,10 @@ void DecimalPTest::testOperators()
     QVERIFY(e.getDouble() <= f.getDouble());
 }
 
-void DecimalPTest::cleanupTestCase()
+void DecimalWrapperTest::cleanupTestCase()
 {
 
 }
-QTEST_APPLESS_MAIN(DecimalPTest)
+QTEST_APPLESS_MAIN(DecimalWrapperTest)
 
 #include "tst_decimalptest.moc"

@@ -1,6 +1,6 @@
 #include <QCoreApplication>
 #include <QDebug>
-#include "DecimalP.h"
+#include "DecimalWrapper.h"
 
 //En C++ int y long son el mismo tipo de dato, por consiguiente,
 //los valores dentro de -2,147,483,648 to 2,147,483,647
@@ -44,31 +44,31 @@ int main(int argc, char *argv[])
     qDebug() << "";
 
     intValue = 5;
-    DecimalP b(intValue); //int ctr (prec = 0)
+    DecimalWrapper b(intValue); //int ctr (prec = 0)
     qDebug() << "Convtr Ctr: Num(" << b.getNum() <<"), Double(" << b.getDouble()
              << "), Prec(" << b.getPrec() <<")";
     qDebug() << "";
 
     doubleValue = 5.05;
-    DecimalP c(doubleValue,1); //double ctr
+    DecimalWrapper c(doubleValue,1); //double ctr
     qDebug() << "double Ctr: Num(" << c.getNum() <<"), Double(" << c.toString()
              << "), Prec(" << c.getPrec() <<")";
     qDebug() << "";
 
     intValue = 500;
-    DecimalP d(intValue,2); //int ctr
+    DecimalWrapper d(intValue,2); //int ctr
     qDebug() << "int Ctr: Num(" << d.getNum() <<"), Double(" << d.toString()
              << "), Prec(" << d.getPrec() <<")";
     qDebug() << "";
 
     intValue = 400;
-    DecimalP e(intValue,2); //int ctr
+    DecimalWrapper e(intValue,2); //int ctr
     qDebug() << "int Ctr: Num(" << e.getNum() <<"), Double(" << e.toString()
              << "), Prec(" << e.getPrec() <<")";
     qDebug() << "";
 
     doubleValue = 555.7777;
-    DecimalP f(doubleValue,4); //double ctr
+    DecimalWrapper f(doubleValue,4); //double ctr
     qDebug() << "double Ctr: Num(" << f.getNum() <<"), Double(" << f.toString()
              << "), Prec(" << f.getPrec() <<")";
     qDebug() << "";
@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
     strValue = "5003055";
     if (isValidNum(strValue)==true)
       {
-        DecimalP g(strValue,4); //QString ctr
+        DecimalWrapper g(strValue,4); //QString ctr
         qDebug() << "QString Ctr: Num(" << g.getNum() <<"), Double(" <<
                     g.toString() << "), Prec(" << g.getPrec() <<")";
         qDebug() << "";
@@ -95,7 +95,7 @@ int main(int argc, char *argv[])
     strValue = "204800.96";
     if (isValidNum(strValue)==true)
       {
-        DecimalP h(strValue,4); //QString ctr
+        DecimalWrapper h(strValue,4); //QString ctr
         qDebug() << "QString Ctr: Num(" << h.getNum() <<"), Double(" <<
                     h.toString() << "), Prec(" << h.getPrec() <<")";
         qDebug() << "";
@@ -106,7 +106,7 @@ int main(int argc, char *argv[])
                                            "Double value!";
       }
 
-    DecimalP i(f); //copy
+    DecimalWrapper i(f); //copy
     qDebug() << "Copy: Num(" << i.getNum() <<"), Double(" << i.toString() <<
                 "), Prec(" << i.getPrec() <<")";
     qDebug() << "";

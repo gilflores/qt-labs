@@ -1,25 +1,25 @@
-#include "DecimalP.h"
+#include "DecimalWrapper.h"
 #include <QDebug>
 
-DecimalP::DecimalP():
+DecimalWrapper::DecimalWrapper():
     _numLong(0),
     _numDouble(0),
     _prec(0)
 {
 
-}//DecimalP()
+}//DecimalWrapper()
 
-DecimalP::DecimalP(int numInt, unsigned short int prec)
+DecimalWrapper::DecimalWrapper(int numInt, unsigned short int prec)
 {
      setLong(numInt, prec); 
-}//DecimalP(int numInt, unsigned short int prec)
+}//DecimalWrapper(int numInt, unsigned short int prec)
 
-DecimalP::DecimalP(double numDouble, unsigned short int prec) 
+DecimalWrapper::DecimalWrapper(double numDouble, unsigned short int prec) 
 { 
     setDouble(numDouble, prec); 
-}//DecimalP(double numDouble, unsigned short int prec)
+}//DecimalWrapper(double numDouble, unsigned short int prec)
 
-DecimalP::DecimalP(QString numStr, unsigned short int prec) 
+DecimalWrapper::DecimalWrapper(QString numStr, unsigned short int prec) 
 {
     if (prec>10) 
       {
@@ -34,37 +34,37 @@ DecimalP::DecimalP(QString numStr, unsigned short int prec)
 
     _numDouble = numStr.toDouble();
     _numLong = doubleToLong(_numDouble);
-}//DecimalP(QString numStr, unsigned short int prec)
+}//DecimalWrapper(QString numStr, unsigned short int prec)
 
-DecimalP::DecimalP(const DecimalP& copyObj): 
+DecimalWrapper::DecimalWrapper(const DecimalWrapper& copyObj): 
     _numLong(copyObj._numLong), 
     _numDouble(copyObj._numDouble),
     _prec(copyObj._prec)
 {
 
-}//DecimalP(const DecimalP& copyObj) -Copy Ctr-
+}//DecimalWrapper(const DecimalWrapper& copyObj) -Copy Ctr-
 
-DecimalP::~DecimalP()
+DecimalWrapper::~DecimalWrapper()
 {
 
-}//~DecimalP()
+}//~DecimalWrapper()
 
-long DecimalP::getNum()
+long DecimalWrapper::getNum()
 { 
     return _numLong; 
 }//getNum()
 
-double DecimalP::getDouble()
+double DecimalWrapper::getDouble()
 {
     return _numDouble;
 }//getDouble()
 
-int DecimalP::getPrec()
+int DecimalWrapper::getPrec()
 { 
     return _prec; 
 }//getPrec()
 
-void DecimalP::setLong(int num, unsigned short int prec)
+void DecimalWrapper::setLong(int num, unsigned short int prec)
 {
     if (prec>10) 
       {
@@ -79,7 +79,7 @@ void DecimalP::setLong(int num, unsigned short int prec)
     _numDouble = longToDouble(num);
 }//setLong(int num, unsigned short int prec)
 
-void DecimalP::setDouble(double numDouble, unsigned short int prec)
+void DecimalWrapper::setDouble(double numDouble, unsigned short int prec)
 {
     QString auxValue = "";
 
@@ -100,7 +100,7 @@ void DecimalP::setDouble(double numDouble, unsigned short int prec)
     _numLong = doubleToLong(_numDouble);
 }//setDouble(double numDouble, unsigned short int prec)
 
-void DecimalP::toEZC()
+void DecimalWrapper::toEZC()
 {
     QString auxValue = QString::number(_numLong);
     int i;
@@ -129,22 +129,22 @@ void DecimalP::toEZC()
     }
 }//toEZC()
 
-QString DecimalP::toString()
+QString DecimalWrapper::toString()
 {
     return QString::number(_numDouble, 'f', _prec);
 }//toString()
 
-double DecimalP::operator+(const DecimalP& otherDec)
+double DecimalWrapper::operator+(const DecimalWrapper& otherDec)
 {
     return _numDouble + otherDec._numDouble;
 }//operator+()
 
-double DecimalP::operator-(const DecimalP& otherDec)
+double DecimalWrapper::operator-(const DecimalWrapper& otherDec)
 {
     return _numDouble - otherDec._numDouble;
 }//operator-()
 
-bool DecimalP::operator==(const DecimalP& otherDec)
+bool DecimalWrapper::operator==(const DecimalWrapper& otherDec)
 {
     if (_numDouble == otherDec._numDouble)
       {
@@ -156,7 +156,7 @@ bool DecimalP::operator==(const DecimalP& otherDec)
       }
 }//operator==()
 
-bool DecimalP::operator!=(const DecimalP& otherDec)
+bool DecimalWrapper::operator!=(const DecimalWrapper& otherDec)
 {
     if (_numDouble != otherDec._numDouble)
       {
@@ -168,7 +168,7 @@ bool DecimalP::operator!=(const DecimalP& otherDec)
       }
 }//operator!=()
 
-bool DecimalP::operator>(const DecimalP& otherDec)
+bool DecimalWrapper::operator>(const DecimalWrapper& otherDec)
 {
     if (_numDouble > otherDec._numDouble)
       {
@@ -180,7 +180,7 @@ bool DecimalP::operator>(const DecimalP& otherDec)
       }
 }//operator>()
 
-bool DecimalP::operator<(const DecimalP& otherDec)
+bool DecimalWrapper::operator<(const DecimalWrapper& otherDec)
 {
     if (_numDouble < otherDec._numDouble)
       {
@@ -192,7 +192,7 @@ bool DecimalP::operator<(const DecimalP& otherDec)
       }
 }//operator<()
 
-bool DecimalP::operator>=(const DecimalP& otherDec)
+bool DecimalWrapper::operator>=(const DecimalWrapper& otherDec)
 {
     if (_numDouble >= otherDec._numDouble)
       {
@@ -204,7 +204,7 @@ bool DecimalP::operator>=(const DecimalP& otherDec)
       }
 }//operator>=()
 
-bool DecimalP::operator<=(const DecimalP& otherDec)
+bool DecimalWrapper::operator<=(const DecimalWrapper& otherDec)
 {
     if (_numDouble <= otherDec._numDouble)
       {
@@ -217,7 +217,7 @@ bool DecimalP::operator<=(const DecimalP& otherDec)
 }//operator<=()
 
 // UTILITIES
-QString DecimalP::adjPrec(QString value)
+QString DecimalWrapper::adjPrec(QString value)
 {
     int dotLoc = 0;
 
@@ -247,7 +247,7 @@ QString DecimalP::adjPrec(QString value)
     return value;
 }//adjPrec()
 
-double DecimalP::longToDouble(long value)
+double DecimalWrapper::longToDouble(long value)
 {
     double valueAsDouble = (double)value;
     int i;
@@ -266,7 +266,7 @@ double DecimalP::longToDouble(long value)
     return valueAsDouble;
 }//longToDouble()
 
-long DecimalP::doubleToLong(double value)
+long DecimalWrapper::doubleToLong(double value)
 {
     int i;
 
